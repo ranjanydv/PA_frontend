@@ -1,32 +1,28 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import url from '../../common/url.js'
 
 function BiddingCard(props) {
+    const [users, setUsers] = useState([])
     const bidder = props.user
 
-    const getBidder = async (da) => {
-        // await api.users.getSingleUser(data)
+    const getBidder = async () => {
         try {
             await axios
-                .get(`${url.base_api}users/64294bb71a5088d2b48fa714`, {
+                .get(`${url.proxy_api}users/${bidder}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 })
                 .then((res) => {
-                    console.log(res.data)
+                    setUsers(res.data.user)
                 })
         } catch (error) {
             console.error(error.response.data)
             console.error(error.response.data.msg)
         }
     }
-    // getBidder().then((r) => {
-    // 	console.log(r)
-    // })
-    console.log(bidder === props.user)
 
     useEffect(() => {
         getBidder(bidder)
@@ -50,7 +46,11 @@ function BiddingCard(props) {
                             </div>
                             <div className="bidder-content">
                                 <Link to={'#'}>
-                                    <h6>{props.user}</h6>
+                                    {users._id &&
+                                    users._id === props.user
+                                        ? (<h6>{users.name}</h6>)
+                                        : (<h6>Anonymous Bidder</h6>)}
+                                    {/*{props.user === users._id && (<h6>{users.name}</h6>)}*/}
                                 </Link>
                                 <p>रु {props.amount}</p>
                             </div>

@@ -5,4 +5,5 @@ export default {
 	//     : '/api/v1/',
 
 	proxy_api: '/api/v1/',
+	home:'http://localhost:3000/'
 }

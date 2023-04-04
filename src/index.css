@@ -21,6 +21,18 @@
     opacity: 0.6;
 }
 
+.gif {
+    /*content: '';*/
+    /*height: 50px;*/
+    /*width: 50px;*/
+    /*background: url("/src/assets/gif/fast-forward.png");*/
+}
+
+.gif:hover {
+    height: 50px;
+    width: 50px;
+    content: url("/src/assets/gif/fast-forward.gif");
+}
 
 @media only screen and (min-width: 1199px) {
     .main-menu ul li:hover ul.submenu {

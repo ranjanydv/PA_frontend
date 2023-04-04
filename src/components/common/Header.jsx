@@ -14,7 +14,7 @@ function Header() {
     })
 
     /* Method that will fix header after a specific scrollable */
-    const isSticky = (e) => {
+    const isSticky = () => {
         const header = document.querySelector('.header-area')
         const scrollTop = window.scrollY
         scrollTop >= 20
@@ -26,8 +26,8 @@ function Header() {
 
     /*---------menu button event----------*/
     const handleSidbarMenu = () => {
-        if (sidebar === false || sidebar === 0) {
-            setSidebar(1)
+        if (sidebar === false ) {
+            setSidebar(true)
         } else {
             setSidebar(false)
         }
@@ -36,8 +36,8 @@ function Header() {
     /*---------add event scroll top----------*/
     const scrollTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
     const searchFullScreen = () => {
-        if (search === false || search === 0) {
-            setSearch(1)
+        if (search === false) {
+            setSearch(true)
             console.log(search)
         } else {
             setSearch(false)
@@ -60,6 +60,8 @@ function Header() {
                 return {activeMenu: 'about'}
             case 'contact':
                 return {activeMenu: 'contact'}
+            case 'account':
+                return {activeMenu: 'account'}
             default:
                 return {activeMenu: ''}
         }
@@ -68,7 +70,7 @@ function Header() {
     return (
         <>
             <TopbarHeader/>
-            <div className={search === 1 ? 'mobile-search slide' : 'mobile-search'}>
+            <div className={search ? 'mobile-search slide' : 'mobile-search'}>
                 <div className="container">
                     <div className="row d-flex justify-content-center">
                         <div className="col-md-11">
@@ -96,7 +98,7 @@ function Header() {
                         />
                     </Link>
                 </div>
-                <div className={sidebar === 1 ? 'main-menu show-menu' : 'main-menu'}>
+                <div className={sidebar ? 'main-menu show-menu' : 'main-menu'}>
                     <div className="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
                         <div className="mobile-logo-wrap ">
                             <Link to={'/'}>
@@ -144,6 +146,15 @@ function Header() {
                                 className={`${state.activeMenu === 'contact' ? 'active' : ''} `}
                             >
                                 Contact
+                            </Link>
+                        </li>
+                        <li className={"mobile-menu-btn d-lg-none"} onClick={() => dispatch({type: 'account'})}>
+                            <Link
+                                to={`/login`}
+                                onClick={scrollTop}
+                                className={`${state.activeMenu === 'account' ? 'active' : ''} `}
+                            >
+                                Account
                             </Link>
                         </li>
                     </ul>

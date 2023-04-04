@@ -4,7 +4,7 @@ import Counter from "../../common/Counter.jsx";
 
 
 function ProductsCard(props) {
-    const countdownDate = new Date("Jul 30, 2023, 01:00:00")
+    // const countdownDate = new Date("Jul 30, 2023, 01:00:00")
     return (
         <>
             <div
@@ -17,7 +17,7 @@ function ProductsCard(props) {
                     <div className="auction-timer">
                         <div className="countdown" id="timer1">
                             <h4>
-                                <Counter date={countdownDate}/>
+                                <Counter date={props.liveOn}/>
                             </h4>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ function ProductsCard(props) {
                     </p>
                     <div className="auction-card-bttm">
                         <Link
-                            to={`/auction-details`}
+                            to={`/auction-details/${props.product}`}
                             onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
                             className="eg-btn btn--primary btn--sm"
                         >

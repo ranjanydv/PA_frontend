@@ -1,32 +1,31 @@
-import {useEffect} from "react";
 // import {redirectToLogin} from "../../common/utils.js";
 
+import {useEffect, useState} from "react";
+
 const ProfileContent = () => {
-
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')))
     useEffect(() => {
-        // getUserData()
-    }, []);
-
-// const getUserData = async ()=>{
-//     await api.users.showMe()
-// }
-
+        const newUser = localStorage.getItem('userInfo')
+        const uu = JSON.parse(newUser)
+        setUser(uu.user)
+    }, [])
+    const  active = 'show active'
     const handleSubmit = (e) => {
         e.preventDefault()
         // redirectToLogin()
     }
-
     return (
         <>
-            <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <div className={`tab-pane fade ${user.role !== 'admin' && active}`} id="v-pills-profile" role="tabpanel"
+                 aria-labelledby="v-pills-profile-tab">
                 <div className="dashboard-profile">
                     <div className="owner">
                         <div className="image">
                             <img alt="images" src={"/images/bg/pro-pic.png"}/>
                         </div>
                         <div className="content">
-                            <h3>Ranjan Kumar Yadav</h3>
-                            <p className="para">Developer</p>
+                            <h3>{user.name}</h3>
+                            <p className="para">{user.role === 'owner' && 'Merchant'}</p>
                         </div>
                     </div>
                     <div className="form-wrapper">
