@@ -31,7 +31,7 @@ const DashboardWrap = () => {
                         <DashboardMenu/>
                         <div className="col-lg-9">
                             <div className="tab-content" id="v-pills-tabContent">
-                                {user.role === 'admin' && (
+                                {user && user.role === 'admin' && (
                                     <DashboardContentTab/>
                                 )}
                                 <ProfileContent/>

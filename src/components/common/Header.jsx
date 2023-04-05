@@ -7,6 +7,7 @@ function Header() {
     const [sidebar, setSidebar] = useState(false)
     // Sticky Menu Area
     useEffect(() => {
+        // const user = JSON.parse(localStorage.getItem('userInfo'));
         window.addEventListener('scroll', isSticky)
         return () => {
             window.removeEventListener('scroll', isSticky)
@@ -26,7 +27,7 @@ function Header() {
 
     /*---------menu button event----------*/
     const handleSidbarMenu = () => {
-        if (sidebar === false ) {
+        if (sidebar === false) {
             setSidebar(true)
         } else {
             setSidebar(false)
@@ -82,7 +83,7 @@ function Header() {
                         </div>
                         <div className="col-1 d-flex justify-content-end align-items-center">
                             <div className="search-cross-btn " onClick={searchFullScreen}>
-                                 {/*<i className="bi bi-search me-4"></i>*/}
+                                {/*<i className="bi bi-search me-4"></i>*/}
                                 <i className="bi bi-x"/>
                             </div>
                         </div>

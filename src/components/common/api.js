@@ -79,6 +79,12 @@ export default {
                 url: url.proxy_api + 'products/' + productId,
             })
         },
+        deleteProduct: async (productId) => {
+            return axios({
+                method: 'DELETE',
+                url: url.proxy_api + 'products/' + productId
+            })
+        }
     },
     bid: {
         createBid: async () => {

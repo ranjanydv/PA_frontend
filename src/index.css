@@ -44,6 +44,9 @@
 .auction-img img {
     aspect-ratio: 4/3;
 }
+.boxy-image{
+    aspect-ratio: 4/3;
+}
 
 .ratio-image {
     aspect-ratio: 16/11;

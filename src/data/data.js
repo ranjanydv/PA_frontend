@@ -32,10 +32,10 @@ export const curencyOptions = [
     { value: 'Russian ruble', label: 'Russian ruble' },
 ]
 export const orderListOptions = [
-    { value: '05', label: 'Show: Last 05 Order' },
-    { value: '03', label: 'Show: Last 03 Order' },
-    { value: '02', label: 'Show: Last 02 Order' },
-    { value: '10', label: 'Show: Last 10 Order' },
+    { value: '05', label: 'Show: Last 05 Products' },
+    { value: '03', label: 'Show: Last 03 Products' },
+    { value: '02', label: 'Show: Last 02 Products' },
+    { value: '10', label: 'Show: Last 10 Products' },
 ]
 export const stateOptions = [
     // { value: 'KO', label: 'Koshi' },

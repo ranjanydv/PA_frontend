@@ -1,12 +1,28 @@
-import React from 'react'
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom"
 
 function HeroBanner2() {
+    const [user, setUser] = useState(null)
+    useEffect(() => {
+        try {
+            const newUser = localStorage.getItem('userInfo')
+            if (newUser) {
+                console.log(newUser)
+                const uu = JSON.parse(newUser)
+                setUser(uu.user)
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }, [])
     const scrollTop = () => window.scrollTo({top: 0, behavior: "smooth"})
     return (
         <>
             <div className="hero-area hero-style-three">
-                <Link to={`/join-merchant`} onClick={scrollTop} className="join-merchant">Join Merchant</Link>
+                {user && user.role === 'user' && (
+                    <Link to={`/join-merchant`} onClick={scrollTop} className="join-merchant">Join Merchant</Link>
+                )}
+
                 <img alt="bannerImage" src={"/images/bg/np.png"} className="img-fluid banner-ellips"/>
                 <img alt="bannerImage" src={"/images/bg/home3-banner.png"} className="home3-banner img-fluid"/>
                 <div className="container-lg container-fluid">
@@ -24,7 +40,7 @@ function HeroBanner2() {
                                     country &hearts;.
                                 </p>
                                 <Link
-                                    to={`/live-auction`} onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+                                    to={`/products`} onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
                                     className="eg-btn btn--primary4 btn--lg wow fadeInUp" data-wow-duration="2s"
                                     data-wow-delay="0.8s">
                                     Start Exploring
