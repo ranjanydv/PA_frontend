@@ -1,32 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import useLocalState from '../../../utils/LocalState'
-import api from '../../../common/api'
 import { FiTrash } from 'react-icons/fi'
 import { toast } from 'react-toastify'
 
-function ProductsList() {
+import api from '../../../common/api'
+import helper from '../../../common/helper'
+import useLocalState from '../../../utils/LocalState'
+
+function BidList() {
 	const [products, setProducts] = useState([])
 	const { alert, showAlert, loading, setLoading, hideAlert } = useLocalState()
+
 	useEffect(() => {
 		setLoading(true)
 		getAllProducts()
 	}, [])
 
 	const getAllProducts = async () => {
-		await api.products
-			.getAllProduct()
+		await api.bid
+			.getAllBids()
 			.then((res) => {
-				console.log(res.data.products)
-				const tempProducts = res.data.products
-				setProducts(tempProducts)
+				console.log(res.data.bids)
+				const tempBids = res.data.bids
+				setProducts(tempBids)
+				showAlert({
+					text: `Bids Fetched`,
+					type: 'success',
+				})
+				setTimeout(() => {
+					hideAlert()
+				}, 1600)
 				setLoading(false)
 			})
 			.catch((err) => {
 				console.log(err.response.data)
-				toast.error('Could Not Fetch Products')
+				toast.warning('Could Not Fetch Users')
 				showAlert({
-					text: `Could Not Fetch Products`,
+					text: `Could Not Fetch Users`,
 					type: 'danger',
 				})
 				setTimeout(() => {
@@ -39,7 +49,6 @@ function ProductsList() {
 		console.log(product._id)
 		await api.products.deleteProduct(product._id).then((res) => {
 			console.log(res.data.msg)
-			toast.danger(`Deleted Product ${product.name}`)
 			showAlert({
 				text: `Deleted Product ${product.name}`,
 				type: 'danger',
@@ -62,12 +71,12 @@ function ProductsList() {
 		<>
 			<div
 				className="tab-pane fade"
-				id="v-pills-order"
+				id="v-pills-purchase"
 				role="tabpanel"
-				aria-labelledby="v-pills-order-tab"
+				aria-labelledby="v-pills-purchase-tab"
 			>
 				<div className="table-title-area">
-					<h3>All Products</h3>
+					<h3>All Bids</h3>
 					{alert.show && (
 						<div
 							className={`alert alert-${alert.type} text-center`}
@@ -88,11 +97,10 @@ function ProductsList() {
 							<thead>
 								<tr>
 									<th>SN</th>
-									<th>Image</th>
+									<th>Bidder Name</th>
 									<th>Product Name</th>
-									<th>Product Price</th>
-									<th>Highest Bid</th>
-									<th>Status</th>
+									<th>Bid Amount</th>
+									<th>Bid Time</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -102,17 +110,15 @@ function ProductsList() {
 										return (
 											<tr key={id}>
 												<td data-label="SN">{id + 1}</td>
-												<td data-label="Image">
-													<img
-														alt={product.name}
-														src={product.image}
-														className="img-fluid boxy-image"
-													/>
+												<td data-label="Bidder Name">{product.bidder.name}</td>
+												<td data-label="Product Name">
+													{product.product.name}
 												</td>
-												<td data-label="Product Name">{product.name}</td>
-												<td data-label="Product Price">{product.price}</td>
-												<td data-label="Highest Bid">रु {product.lastBid}</td>
-												<td data-label="Status">{product.status}</td>
+												<td data-label="Bid Amount">{product.bidAmount}</td>
+												{/* <td data-label="Bid Time">{product.bidTime}</td> */}
+												<td data-label="Bid Time">
+													{helper.formatDate(product.bidTime)}
+												</td>
 												<td data-label="Action">
 													<button
 														className="btn btn-outline-danger"
@@ -131,7 +137,8 @@ function ProductsList() {
 				{/* pagination area */}
 				<div className="table-pagination">
 					<p>
-						Showing 1 to {products.length} of {products.length} entries
+						{/* Showing 1 to {products ? products.length : '0'} of {products.length} entries */}
+						Showing 1 to {products ? products.length : '0'} entries
 					</p>
 					<nav className="pagination-wrap">
 						<ul className="pagination style-two d-flex justify-content-center gap-md-3 gap-2">
@@ -168,4 +175,4 @@ function ProductsList() {
 	)
 }
 
-export default ProductsList
+export default BidList

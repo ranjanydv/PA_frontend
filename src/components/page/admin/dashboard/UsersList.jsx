@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import useLocalState from '../../../utils/LocalState'
 import api from '../../../common/api'
-import { FiTrash } from 'react-icons/fi'
+import { FiEdit, FiTrash } from 'react-icons/fi'
 import { toast } from 'react-toastify'
 
-function ProductsList() {
+import useLocalState from '../../../utils/LocalState'
+
+function UsersList() {
 	const [products, setProducts] = useState([])
 	const { alert, showAlert, loading, setLoading, hideAlert } = useLocalState()
+
 	useEffect(() => {
 		setLoading(true)
 		getAllProducts()
 	}, [])
 
 	const getAllProducts = async () => {
-		await api.products
-			.getAllProduct()
+		await api.users
+			.getAllUser()
 			.then((res) => {
-				console.log(res.data.products)
-				const tempProducts = res.data.products
-				setProducts(tempProducts)
+				console.log(res.data.users)
+				const tempUsers = res.data.users
+				setProducts(tempUsers)
+				showAlert({
+					text: `Users Fetched`,
+					type: 'success',
+				})
+				setTimeout(() => {
+					hideAlert()
+				}, 1600)
 				setLoading(false)
 			})
 			.catch((err) => {
 				console.log(err.response.data)
-				toast.error('Could Not Fetch Products')
+				toast.warning('Could Not Fetch Users')
 				showAlert({
-					text: `Could Not Fetch Products`,
+					text: `Could Not Fetch Users`,
 					type: 'danger',
 				})
 				setTimeout(() => {
@@ -39,7 +48,6 @@ function ProductsList() {
 		console.log(product._id)
 		await api.products.deleteProduct(product._id).then((res) => {
 			console.log(res.data.msg)
-			toast.danger(`Deleted Product ${product.name}`)
 			showAlert({
 				text: `Deleted Product ${product.name}`,
 				type: 'danger',
@@ -62,12 +70,12 @@ function ProductsList() {
 		<>
 			<div
 				className="tab-pane fade"
-				id="v-pills-order"
+				id="v-pills-user"
 				role="tabpanel"
-				aria-labelledby="v-pills-order-tab"
+				aria-labelledby="v-pills-user-tab"
 			>
 				<div className="table-title-area">
-					<h3>All Products</h3>
+					<h3>All Users</h3>
 					{alert.show && (
 						<div
 							className={`alert alert-${alert.type} text-center`}
@@ -88,11 +96,9 @@ function ProductsList() {
 							<thead>
 								<tr>
 									<th>SN</th>
-									<th>Image</th>
-									<th>Product Name</th>
-									<th>Product Price</th>
-									<th>Highest Bid</th>
-									<th>Status</th>
+									<th>User Name</th>
+									<th>User Email</th>
+									<th>User Role</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -102,18 +108,17 @@ function ProductsList() {
 										return (
 											<tr key={id}>
 												<td data-label="SN">{id + 1}</td>
-												<td data-label="Image">
-													<img
-														alt={product.name}
-														src={product.image}
-														className="img-fluid boxy-image"
-													/>
-												</td>
-												<td data-label="Product Name">{product.name}</td>
-												<td data-label="Product Price">{product.price}</td>
-												<td data-label="Highest Bid">रु {product.lastBid}</td>
-												<td data-label="Status">{product.status}</td>
+												<td data-label="User Name">{product.name}</td>
+												<td data-label="User Email">{product.email}</td>
+												<td data-label="User Role">{product.role}</td>
 												<td data-label="Action">
+													<button
+														style={{ marginRight: '10px' }}
+														className="btn btn-outline-dark"
+														onClick={() => handleDelete(product)}
+													>
+														<FiEdit size={16} />
+													</button>
 													<button
 														className="btn btn-outline-danger"
 														onClick={() => handleDelete(product)}
@@ -168,4 +173,4 @@ function ProductsList() {
 	)
 }
 
-export default ProductsList
+export default UsersList

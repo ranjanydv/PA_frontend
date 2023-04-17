@@ -18,5 +18,18 @@
 		"titleBar.inactiveBackground": "#0b90a899",
 		"titleBar.inactiveForeground": "#e7e7e799"
 	},
-	"peacock.color": "#0b90a8"
+	"peacock.color": "#0b90a8",
+	"cSpell.words": [
+		"appspot",
+		"EOLO",
+		"firebaseapp",
+		"Galli",
+		"Hhsoak",
+		"Kumari",
+		"poicy",
+		"Ratopul",
+		"Saira",
+		"signup",
+		"toastify"
+	]
 }
