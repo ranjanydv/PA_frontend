@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../common/api'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const DashboardMenu = () => {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')))
@@ -17,6 +18,7 @@ const DashboardMenu = () => {
 		await api.auth
 			.logout()
 			.then((res) => {
+				toast.success('Logged out successfully')
 				console.log('logged out')
 				localStorage.setItem('userInfo', '')
 				localStorage.setItem('authorized', false)

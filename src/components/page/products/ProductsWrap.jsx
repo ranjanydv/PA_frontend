@@ -46,16 +46,6 @@ function ProductsWrap() {
 			<Header />
 			<Breadcrumb pageName={'All Products'} pageTitle={'products'} />
 			<div className="live-auction-section pt-120 pb-120">
-				{/* <img
-					alt="images"
-					src={'/images/bg/section-bg.png'}
-					className="img-fluid section-bg-top"
-				/>
-				<img
-					alt="images"
-					src={'/images/bg/section-bg.png'}
-					className="img-fluid section-bg-bottom"
-				/> */}
 				<div className="container">
 					{alert.show && (
 						<div

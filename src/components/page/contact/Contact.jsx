@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import useLocalState from '../../utils/LocalState'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
+import useLocalState from '../../utils/LocalState'
+import api from '../../common/api'
 
 function ContactWrapper() {
 	const [name, setName] = useState('')
@@ -14,8 +16,19 @@ function ContactWrapper() {
 	const { alert, showAlert, loading, setLoading, hideAlert } = useLocalState()
 
 	useEffect(() => {
+		showMe()
 		hideAlert()
 	}, [])
+
+	useEffect(() => {}, [])
+
+	const showMe = async () => {
+		await api.users.showMe().then((response) => {
+			console.log(response.data.user)
+			setName(response.data.user.name)
+			setEmail(response.data.user.email)
+		})
+	}
 
 	const handleSend = async (e) => {
 		e.preventDefault()
@@ -27,8 +40,6 @@ function ContactWrapper() {
 				.post(`/api/v1/email`, contactUser)
 				.then((response) => {
 					console.log(response)
-					setName('')
-					setEmail('')
 					setContact('')
 					setSubject('')
 					setMessage('')
@@ -159,6 +170,7 @@ function ContactWrapper() {
 													placeholder="Your Name :"
 													required={true}
 													value={name}
+													disabled
 													onChange={(e) => setName(e.target.value)}
 												/>
 											</div>
@@ -170,6 +182,7 @@ function ContactWrapper() {
 													placeholder="Your Email :"
 													required={true}
 													value={email}
+													disabled
 													onChange={(e) => setEmail(e.target.value)}
 												/>
 											</div>

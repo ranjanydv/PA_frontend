@@ -24,11 +24,18 @@ function App() {
 					<Route path="products" element={<ProductsWrap />} />
 					<Route path="signUp" element={<SignUp />} />
 					<Route path="login" element={<Login />} />
-					<Route path="/auction-details/:id" element={<AuctionDetailsWrap />} />
+
+					<Route
+						path="/auction-details/:id"
+						exact
+						element={<AuctionDetailsWrap />}
+					/>
+
 					<Route path="dashboard" element={<Dashboard />} />
 					<Route path="live-auction" element={<LiveAuctionPage />} />
 					<Route path="join-merchant" element={<JoinMerchant />} />
 					{/* <Route path="how-works" element={<HowItWork/>}/> */}
+
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>

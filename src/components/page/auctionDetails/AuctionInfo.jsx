@@ -39,13 +39,13 @@ function AuctionInfo(props) {
 						<h3>{props.product.name}</h3>
 						<p className="para">{props.product.description}</p>
 						<h4>
-							Bidding Price: <span> रु {props.product.price}</span>
+							Base Price: <span> रु {props.product.price}</span>
 						</h4>
 						<div className="bid-form">
 							<div className="form-title">
 								<h5>Bid Now</h5>
 
-								{props.product.lastBid === '0' ? (
+								{props.product.lastBid === 0 ? (
 									<p>Bid Amount : Minimum Bid रु {props.product.price + 1}</p>
 								) : (
 									<p>Bid Amount : Minimum Bid रु {props.product.lastBid + 1}</p>
@@ -54,6 +54,7 @@ function AuctionInfo(props) {
 							<CreateBid
 								product={props.product.id}
 								lastBid={props.product.lastBid}
+								basePrice={props.product.price}
 							/>
 						</div>
 					</div>

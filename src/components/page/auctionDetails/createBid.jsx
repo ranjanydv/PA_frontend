@@ -24,6 +24,15 @@ function CreateBid(props) {
 			toast.error('Bid should be greater than 100')
 			return
 		}
+
+		if (bid < props.basePrice) {
+			showAlert({
+				text: `Bid should be greater than ${props.basePrice}`,
+				type: 'danger',
+			})
+			toast.error(`Bid should be greater than ${props.basePrice}`)
+			return
+		}
 		if (bid < props.lastBid) {
 			showAlert({
 				text: `Bid should be greater than ${props.lastBid}`,
@@ -63,9 +72,11 @@ function CreateBid(props) {
 					console.error(error.response.data.msg, error.response.status)
 					setLoading(false)
 					showAlert({ text: error.response.data.msg })
+					// toast.error(error.response.data.msg)
 				})
 		} catch (error) {
 			console.error(error)
+			toast.error(error.response.data.msg)
 			showAlert({ text: error.response.data.msg })
 			setLoading(false)
 		}

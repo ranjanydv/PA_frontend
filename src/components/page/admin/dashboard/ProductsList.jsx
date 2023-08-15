@@ -92,7 +92,7 @@ function ProductsList() {
 									<th>Product Name</th>
 									<th>Product Price</th>
 									<th>Highest Bid</th>
-									<th>Status</th>
+									{/* <th>Status</th> */}
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -112,7 +112,7 @@ function ProductsList() {
 												<td data-label="Product Name">{product.name}</td>
 												<td data-label="Product Price">{product.price}</td>
 												<td data-label="Highest Bid">रु {product.lastBid}</td>
-												<td data-label="Status">{product.status}</td>
+												{/* <td data-label="Status">{product.status}</td> */}
 												<td data-label="Action">
 													<button
 														className="btn btn-outline-danger"

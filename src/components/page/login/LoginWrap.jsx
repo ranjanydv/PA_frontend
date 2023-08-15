@@ -35,25 +35,14 @@ function LoginWrap() {
 					setPassword('')
 					localStorage.setItem('userInfo', JSON.stringify(response.data))
 
-					if (response.data.user.role === 'admin') {
-						showAlert({
-							text: `Welcome, ${response.data.user.name}. Redirecting to dashboard...`,
-							type: 'success',
-						})
-						toast.success(`Welcome ${response.data.user.name}`)
-						setTimeout(() => {
-							navigate('/dashboard')
-						}, 1600)
-					} else {
-						showAlert({
-							text: `Welcome, ${response.data.user.name}. Redirecting to home...`,
-							type: 'success',
-						})
-						toast.success(`Welcome ${response.data.user.name}`)
-						setTimeout(() => {
-							navigate('/dashboard')
-						}, 1600)
-					}
+					showAlert({
+						text: `Welcome, ${response.data.user.name}. Redirecting to dashboard...`,
+						type: 'success',
+					})
+					toast.success(`Welcome ${response.data.user.name}`)
+					setTimeout(() => {
+						navigate('/dashboard')
+					}, 1600)
 					setLoading(false)
 					saveUser(response.data.user)
 				})
@@ -155,8 +144,8 @@ function LoginWrap() {
 										<div className="col-12">
 											<div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
 												<div className="form-group">
-													<input type="checkbox" id="html" />
-													<label htmlFor="html">
+													{/* <input type="checkbox" id="html" /> */}
+													<label htmlFor="html" style={{ color: 'white' }}>
 														I agree to the{' '}
 														<Link to={'#'}>Terms &amp; Policy</Link>
 													</label>
@@ -177,14 +166,14 @@ function LoginWrap() {
 										{loading ? 'Loading...' : 'Log in'}
 									</button>
 								</form>
-								<div className="form-poicy-area">
+								{/* <div className="form-poicy-area">
 									<p>
 										By clicking the "signup" button, you create a Premiere
 										Auctioneers account, and you agree to Premiere Auctioneers's{' '}
 										<Link to={'#'}>Terms &amp; Conditions</Link> &amp;{' '}
 										<Link to={'#'}>Privacy Policy.</Link>
 									</p>
-								</div>
+								</div> */}
 							</div>
 						</div>
 					</div>
