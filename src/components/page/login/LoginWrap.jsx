@@ -28,7 +28,10 @@ function LoginWrap() {
 
 		try {
 			await axios
-				.post(`/api/v1/auth/login`, loginUser)
+				.post(
+					`https://premiere-auctioneers-backend.vercel.app/api/v1/auth/login`,
+					loginUser
+				)
 				.then((response) => {
 					console.log(response)
 					setEmail('')

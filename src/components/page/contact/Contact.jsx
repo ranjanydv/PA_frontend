@@ -37,7 +37,10 @@ function ContactWrapper() {
 		const contactUser = { name, email, contact, subject, message }
 		try {
 			await axios
-				.post(`/api/v1/email`, contactUser)
+				.post(
+					`https://premiere-auctioneers-backend.vercel.app/api/v1/email`,
+					contactUser
+				)
 				.then((response) => {
 					console.log(response)
 					setContact('')
